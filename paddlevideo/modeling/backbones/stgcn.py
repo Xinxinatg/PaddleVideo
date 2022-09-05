@@ -281,11 +281,13 @@ class STGCN(nn.Layer):
         kwargs0 = {k: v for k, v in kwargs.items() if k != 'dropout'}
         self.st_gcn_networks = nn.LayerList((
             st_gcn_block(in_channels,
-                         64,
+                         32,
                          kernel_size,
                          1,
                          residual=False,
                          **kwargs0),
+            st_gcn_block(32, 32, kernel_size, 1, **kwargs),
+            st_gcn_block(32, 64, kernel_size, 2, **kwargs),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
             st_gcn_block(64, 64, kernel_size, 1, **kwargs),
