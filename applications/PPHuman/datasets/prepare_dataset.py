@@ -27,22 +27,22 @@ def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
     keypoint = self_norm(keypoint, all_bbox)
 
     scores = all_scores
-    if keypoint.shape[1] > 100:
-        frame_start = (keypoint.shape[1] - 100) // 2
-        keypoint = keypoint[:, frame_start:frame_start + 100:2, :, :]
+    if keypoint.shape[1] >50:
+#         frame_start = (keypoint.shape[1] - 100) // 2
+        keypoint = keypoint[:, -50:, :, :]
         scores = all_scores[frame_start:frame_start + 100:2, :, :]
-    elif keypoint.shape[1] < 100:
+    elif keypoint.shape[1] < 50:
         keypoint = np.concatenate([
             keypoint,
-            np.zeros((2, 100 - keypoint.shape[1], 17, 1), dtype=keypoint.dtype)
-        ], 1)[:, ::2, :, :]
+            np.zeros((2, 50 - keypoint.shape[1], 17, 1), dtype=keypoint.dtype)
+        ], 1)
         scores = np.concatenate([
             all_scores,
-            np.zeros((100 - all_scores.shape[0], 17, 1), dtype=keypoint.dtype)
-        ], 0)[::2, :, :]
+            np.zeros((50- all_scores.shape[0], 17, 1), dtype=keypoint.dtype)
+        ], 0)
     else:
-        keypoint = keypoint[:, ::2, :, :]
-        scores = scores[::2, :, :]
+        keypoint = keypoint
+        scores = scores
     return keypoint, scores
 
 
