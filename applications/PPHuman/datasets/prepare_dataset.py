@@ -22,6 +22,7 @@ def self_norm(kpt, bbox):
 
 def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
     # shape of all_kpts is (T, 17, 2)
+    print('keypoint.shape',all_kpts.shape)
     keypoint = np.expand_dims(np.transpose(all_kpts, [2, 0, 1]),
                               -1)  #(2, T, 17, 1)
     keypoint = self_norm(keypoint, all_bbox)
@@ -30,7 +31,7 @@ def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
     if keypoint.shape[1] >50:
 #         frame_start = (keypoint.shape[1] - 100) // 2
         keypoint = keypoint[:, -50:, :, :]
-        scores = all_scores[frame_start:frame_start + 100:2, :, :]
+        scores = all_scores[-50:, :, :]
     elif keypoint.shape[1] < 50:
         keypoint = np.concatenate([
             keypoint,
@@ -43,7 +44,7 @@ def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
     else:
         keypoint = keypoint
         scores = scores
-    assert keypoing.shape==(2,50,17,1)
+    assert keypoint.shape==(2,50,17,1)
     return keypoint, scores
 
 
