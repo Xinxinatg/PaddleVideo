@@ -43,6 +43,7 @@ def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
     else:
         keypoint = keypoint
         scores = scores
+    assert keypoing.shape==(2,50,17,1)
     return keypoint, scores
 
 
