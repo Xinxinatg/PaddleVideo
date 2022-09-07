@@ -76,6 +76,7 @@ def decode_json_path(json_path):
     all_kpts_np = np.array(all_kpts)
     all_score_np = np.array(all_score)
     all_bbox_np = np.array(all_bbox)
+    print('json_path',json_path)
     video_anno, scores = convert_to_ppvideo(all_kpts_np, all_score_np,
                                             all_bbox_np)
 
