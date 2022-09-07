@@ -302,7 +302,7 @@ class STGCN(nn.Layer):
             st_gcn_block(256, 256, kernel_size, 1, **kwargs),
             st_gcn_block(256, 256, kernel_size, 1, **kwargs),
             st_gcn_block(256, 256, kernel_size, 1, **kwargs),
-            st_gcn_block(256, 256, kernel_size, 1, **kwargs),
+            st_gcn_block(256, 512, kernel_size, 2, **kwargs),
         ))
 
         # initialize parameters for edge importance weighting
