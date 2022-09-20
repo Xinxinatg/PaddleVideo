@@ -2,6 +2,7 @@ import os
 import json
 import numpy as np
 import pickle
+import sys
 """
  This python script is used to convert keypoint results of UR FALL dataset
    for training by PaddleVideo
@@ -20,9 +21,12 @@ def self_norm(kpt, bbox):
     return res
 
 
-def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
+def convert_to_ppvideo(all_kpts, all_scores, all_bbox,json_path):
     # shape of all_kpts is (T, 17, 2)
-    print('keypoint.shape',all_kpts.shape)
+    # print('keypoint.shape',all_kpts.shape)
+    if all_kpts.shape[0]==0:
+           os.remove(json_path)
+           sys.exit("Error message")
     keypoint = np.expand_dims(np.transpose(all_kpts, [2, 0, 1]),
                               -1)  #(2, T, 17, 1)
     keypoint = self_norm(keypoint, all_bbox)
@@ -45,6 +49,7 @@ def convert_to_ppvideo(all_kpts, all_scores, all_bbox):
         keypoint = keypoint
         scores = scores
     assert keypoint.shape==(2,50,17,1)
+
     return keypoint, scores
 
 
@@ -76,9 +81,9 @@ def decode_json_path(json_path):
     all_kpts_np = np.array(all_kpts)
     all_score_np = np.array(all_score)
     all_bbox_np = np.array(all_bbox)
-    print('json_path',json_path)
+    # print('json_path',json_path)
     video_anno, scores = convert_to_ppvideo(all_kpts_np, all_score_np,
-                                            all_bbox_np)
+                                            all_bbox_np,json_path)
 
     return video_anno, scores
 
@@ -87,8 +92,8 @@ if __name__ == '__main__':
     all_keypoints = []
     all_labels = [[], []]
     all_scores = []
-    for i, path in enumerate(os.listdir("annotations")):
-        video_anno, score = decode_json_path(os.path.join("annotations", path))
+    for i, path in enumerate(os.listdir("nega_jsons2")):
+        video_anno, score = decode_json_path(os.path.join("nega_jsons2", path))
 
         all_keypoints.append(video_anno)
         all_labels[0].append(str(i))
