@@ -1,3 +1,7 @@
+# END=1500
+# for ((i=1;i<=END;i++)); do
+#     python prepare_dataset.py
+# done
 import os
 import json
 import numpy as np
