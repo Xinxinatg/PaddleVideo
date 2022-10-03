@@ -18,19 +18,19 @@ DATASET: #DATASET field
     test_num_workers: 0
     train:
         format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevideo/loader/dateset'
-        file_path: "./applications/PPHuman/datasets/train_data.npy" #mandatory, train data index file path
-        label_path: "./applications/PPHuman/datasets/train_label.pkl"
+        file_path: "PaddleVideo/applications/PPHuman/datasets/train_data.npy" #mandatory, train data index file path
+        label_path: "PaddleVideo/applications/PPHuman/datasets/train_label.pkl"
 
     valid:
         format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevideo/loader/dateset'
-        file_path: "./applications/PPHuman/datasets/val_data.npy" #Mandatory, valid data index file path
-        label_path: "./applications/PPHuman/datasets/val_label.pkl"
+        file_path: "PaddleVideo/applications/PPHuman/datasets/val_data.npy" #Mandatory, valid data index file path
+        label_path: "PaddleVideo/applications/PPHuman/datasets/val_label.pkl"
 
         test_mode: True
     test:
         format: "SkeletonDataset" #Mandatory, indicate the type of dataset, associate to the 'paddlevideo/loader/dateset'
-        file_path: "./applications/PPHuman/datasets/val_data.npy" #Mandatory, valid data index file path
-        label_path: "./applications/PPHuman/datasets/val_label.pkl"
+        file_path: "PaddleVideo/applications/PPHuman/datasets/val_data.npy" #Mandatory, valid data index file path
+        label_path: "PaddleVideo/applications/PPHuman/datasets/val_label.pkl"
 
         test_mode: True
 
